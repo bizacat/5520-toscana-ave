@@ -10,7 +10,7 @@
 :root {
   --paper: #FBFBF5;
   --ink: #17251D;
-  --forsythia: #F5D76E;
+  --forsythia: #F2E7C2;
   --gaura: #F4C3CF;
   --oak: #1D3A2B;
   --leaf: #C8DBBF;
@@ -89,6 +89,11 @@ main { padding-right: var(--rail); overflow-x: clip; }
 .ph { position: relative; margin: 0; overflow: hidden; background: color-mix(in srgb, var(--on) 9%, var(--now)); max-width: 100%; }
 .shot { position: absolute; left: 0; width: 100%; top: -9%; height: 118%; object-fit: cover; background: linear-gradient(180deg, color-mix(in srgb, var(--on) 5%, transparent), color-mix(in srgb, var(--on) 17%, transparent)); will-change: transform; }
 .ph.still .shot { top: 0; height: 100%; }
+.pos-curb { object-position: 22% 60%; }
+@media (max-width: 760px) {
+  .pos-curb { object-position: 40% 60%; }
+  .fit-m .shot { top: 0; height: 100%; transform: none !important; }
+}
 .ph figcaption { position: absolute; left: 16px; right: 16px; bottom: 14px; font-size: .9rem; line-height: 1.35; }
 .ph figcaption b { font-weight: 600; margin-right: .5em; }
 .r169 { aspect-ratio: 16/9; } .r32 { aspect-ratio: 3/2; } .r45 { aspect-ratio: 4/5; } .r11 { aspect-ratio: 1; } .r219 { aspect-ratio: 21/10; }
@@ -326,8 +331,8 @@ html.lb-open { overflow: hidden; }
       </div>
     </div>
     <div class="grid wrap" style="position:relative">
-      <figure class="ph r45 c5"><img class="shot" data-drift src="assets/curb-beds.jpg" alt="Native curbside beds with prickly pear, grasses and flowering groundcover" style="object-position:22% 60%" loading="lazy"></figure>
-      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/entry.jpg" alt="Curved front walk to the coral front door, with shade plantings on either side" loading="lazy"></figure>
+      <figure class="ph r45 c5"><img class="shot" data-drift src="assets/curb-beds.jpg" alt="Native curbside beds with prickly pear, grasses and flowering groundcover" class="pos-curb" loading="lazy"></figure>
+      <figure class="ph r32 c7 fit-m"><img class="shot" data-drift src="assets/entry.jpg" alt="Curved front walk to the coral front door, with shade plantings on either side" loading="lazy"></figure>
       <div class="float arrive-plant" data-plant="firecracker" data-depth=".08"></div>
     </div>
   </section>
@@ -351,7 +356,7 @@ html.lb-open { overflow: hidden; }
         </ul>
         <p><span class="todo">Add internet providers and speeds</span></p>
       </div>
-      <figure class="ph r32 c7"><div class="shot" data-drift></div><figcaption><b>Photo 6</b> Desk detail looking out to the front yard.</figcaption></figure>
+      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/office-doors.jpg" alt="The office's French doors open onto the hall, with the kitchen beyond" loading="lazy"></figure>
     </div>
   </section>
 
