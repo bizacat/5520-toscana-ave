@@ -165,6 +165,9 @@ body.on-plants .stem { display: none; }
 .pin-stage .ph figcaption { left: auto; right: 16px; width: min(46%, 22em); text-align: right; color: #F4F6EA; }
 .pin-copy { position: absolute; left: 0; bottom: 0; z-index: 4; background: color-mix(in srgb, #12271C 82%, transparent); color: #F4F6EA; box-sizing: border-box; width: min(100%, 37em); padding: clamp(24px, 3.4vw, 52px); padding-left: max(var(--gut), env(safe-area-inset-left, 0px)); padding-bottom: clamp(56px, 3.4vw, 52px); display: grid; }
 @media (max-width: 760px) { .pin-stage .ph figcaption { top: 14px; bottom: auto; left: 16px; right: auto; width: 56%; text-align: left; } }
+.pin-copy { transition: opacity .5s ease, transform .5s ease; }
+.pin-copy.reveal { opacity: 0; transform: translateY(24px); pointer-events: none; }
+@media (max-width: 760px) { .pin { height: 560vh; } }
 .pin-copy > div { grid-area: 1 / 1; display: grid; gap: 14px; opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
 .pin-copy > div.on { opacity: 1; transform: none; }
 .pin-copy h2 { font-size: clamp(2.3rem, 4.8vw, 5rem); }
@@ -336,7 +339,7 @@ html.lb-open { overflow: hidden; }
       <p class="lede">The flex room sits at the front of the house, behind French doors and apart from the three bedrooms. Close them at nine, open them at five, and the workday stays in its own room. The window looks out on the street, so you can watch neighbors and dogs stroll by and stay connected to the neighborhood between meetings.</p>
     </div>
     <div class="bleed-l">
-      <figure class="ph r169"><div class="shot" data-drift></div><figcaption><b>Photo 5</b> Flex room through the open French doors, desk set up, window light.</figcaption></figure>
+      <figure class="ph r169"><img class="shot" data-drift src="assets/office.jpg" alt="Flex room set up as an office, with two windows looking out to the street" loading="lazy"></figure>
     </div>
     <div class="grid wrap">
       <div class="note c5">
@@ -365,8 +368,8 @@ html.lb-open { overflow: hidden; }
       <figure class="ph r169"><img class="shot" data-drift src="assets/open-plan.jpg" alt="Open dining area and kitchen with tile floors, looking through to the living room and its window onto the backyard" loading="lazy"></figure>
     </div>
     <div class="grid wrap">
-      <figure class="ph r32 c7"><div class="shot" data-drift></div><figcaption><b>Photo 8</b> Kitchen from the dining area.</figcaption></figure>
-      <figure class="ph r45 c5"><div class="shot" data-drift></div><figcaption><b>Photo 9</b> Modern light fixture over the dining area, dimmed low.</figcaption></figure>
+      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/kitchen.jpg" alt="Kitchen with granite counters, a gas range and stainless appliances" loading="lazy"></figure>
+      <figure class="ph r32 c5"><img class="shot" data-drift src="assets/living-kitchen.jpg" alt="Living room looking through to the kitchen, breakfast bar and front office" loading="lazy"></figure>
     </div>
     <div class="bleed-l">
       <figure class="ph r169"><img class="shot" data-drift src="assets/living-room.jpg" alt="Living room with a large window looking out to the live oak in the backyard" loading="lazy"></figure>
@@ -384,15 +387,15 @@ html.lb-open { overflow: hidden; }
     <div class="wrap head">
       <p class="label">Rest</p>
       <h2>Three bedrooms, no stairs.</h2>
-      <p class="lede">The primary suite fits a king-size bed and has its own bath, a custom walnut headboard and solid maple floating nightstands with dimmable lighting. The other two bedrooms share the second full bath.</p>
+      <p class="lede">The primary suite fits a king-size bed and has its own bath and walk-in closet, a custom walnut headboard and solid maple floating nightstands with dimmable lighting. The other two bedrooms share the second full bath.</p>
     </div>
     <div class="bleed-l">
-      <figure class="ph r169"><div class="shot" data-drift></div><figcaption><b>Photo 11</b> Primary bedroom, made bed, window light.</figcaption></figure>
+      <figure class="ph r169"><img class="shot" data-drift src="assets/primary-bedroom.jpg" alt="Primary bedroom with a king bed and a window onto the trees" loading="lazy"></figure>
     </div>
     <div class="grid wrap">
-      <figure class="ph r45 c4"><div class="shot" data-drift></div><figcaption><b>Photo 12</b> Walnut headboard and maple nightstand, lights on.</figcaption></figure>
-      <figure class="ph r45 c4"><div class="shot" data-drift></div><figcaption><b>Photo 13</b> Primary bath.</figcaption></figure>
-      <figure class="ph r45 c4"><div class="shot" data-drift></div><figcaption><b>Photo 14</b> Second bedroom.</figcaption></figure>
+      <figure class="ph r32 c4"><img class="shot" data-drift src="assets/primary-bath.jpg" alt="Primary bath vanity beside the walk-in closet" loading="lazy"></figure>
+      <figure class="ph r32 c4"><img class="shot" data-drift src="assets/bedroom-2.jpg" alt="Second bedroom with a queen bed and window" loading="lazy"></figure>
+      <figure class="ph r32 c4"><img class="shot" data-drift src="assets/hall-bath.jpg" alt="Hall bathroom with a tub, window and long vanity" loading="lazy"></figure>
     </div>
   </section>
 
@@ -407,7 +410,7 @@ html.lb-open { overflow: hidden; }
           <div class="on"><p class="label">Out back</p><h2>A yard with room for everything.</h2><p>Sun, shade, paths and planting beds give the fenced yard distinct spaces to relax, entertain and grow, all under a mature live oak, a hackberry and redbuds.</p></div>
           <div><p class="label">Midday</p><h2>Shade when you want it.</h2><p>A limestone footpath winds past a stone fountain and native beds along the fence, all under the shade of the oak.</p></div>
           <div><p class="label">Gather</p><h2>Room to grow.</h2><p>The back corner pairs a seating area for friends with raised metal veggie beds on a soak hose, so you can host and harvest in the same spot.</p></div>
-          <div><p class="label">Upkeep</p><h2>Easy to keep up.</h2><p>Drought-tolerant native groundcover stands in for thirsty lawn, and the trees were trimmed in September 2026. The oak also shades the back of the house through the hottest part of the day.</p></div>
+          <div><p class="label">Upkeep</p><h2>Easy to keep up.</h2><p>Drought-tolerant native groundcover stands in for thirsty lawn, a rain barrel that stays with the house catches runoff, and the trees were trimmed in September 2026. The oak also shades the back of the house through the hottest part of the day.</p></div>
         </div>
       </div>
     </div>
@@ -496,6 +499,8 @@ html.lb-open { overflow: hidden; }
       <div class="stack">
         <h3>Floor plan</h3>
         <figure class="plan"><img src="assets/floor-plan.jpg" alt="Floor plan showing the office and foyer at the front, open dining, kitchen and living areas, three bedrooms, two baths, laundry and garage" loading="lazy"></figure>
+        <h3>Laundry</h3>
+        <figure class="ph r32"><img class="shot" data-drift src="assets/laundry.jpg" alt="Laundry room with washer and dryer hookups, a shelf and a door to the garage" loading="lazy"></figure>
       </div>
     </div>
     <div class="wrap columns">
@@ -527,7 +532,7 @@ html.lb-open { overflow: hidden; }
           <details><summary>How do showings work?</summary><p>The home is owner-occupied, so showings are by appointment. Buyers without an agent are asked for a pre-approval letter or proof of funds and a photo ID, which are deleted after the showing. For weekend showings, documents are due by noon on Friday.</p></details>
           <details><summary>Do you work with buyer's agents?</summary><p>Yes. I'm open to all written offers. Feel free to include your requested commission in the contract. I evaluate every offer on its net terms.</p></details>
           <details><summary>How do I make an offer?</summary><p>Use the standard TREC One to Four Family Residential Contract and email it with a pre-approval letter or proof of funds dated within the last 30 days. Title is through Rise Title. Please allow 24 to 48 hours for a response.</p></details>
-          <details><summary>What stays with the house?</summary><p>The Wyze security system and the garden care guide. <span class="todo">Add appliances, shades and anything else</span></p></details>
+          <details><summary>What stays with the house?</summary><p>The Wyze security system, the rain barrel and the garden care guide.<span class="todo">Add appliances, shades and anything else</span></p></details>
         </div>
       </div>
     </div>
@@ -794,7 +799,7 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
   var floats=[].slice.call(document.querySelectorAll("[data-depth]")), drifts=[].slice.call(document.querySelectorAll("[data-drift]"));
   var widen=document.getElementById("widen"), pin=document.getElementById("pin"), stage=document.getElementById("pinStage");
   var shots=[].slice.call(stage.querySelectorAll(".ph")), steps=[].slice.call(stage.querySelectorAll(".pin-copy > div"));
-  var lastTone, lastStep=0, ticking=false;
+  var lastTone, lastStep=0, ticking=false, pinCopy=stage.querySelector(".pin-copy"), narrow=matchMedia("(max-width: 760px)");
   function setTone(t){ if(t===lastTone) return; lastTone=t; var c=tones[t], s=document.body.style; s.setProperty("--now",root.getPropertyValue(c[0])); s.setProperty("--on",root.getPropertyValue(c[1])); }
   function frameTick(){
     ticking=false; if(document.body.classList.contains("on-plants")){ setTone("leaf"); return; } var h=vh(), line=h*.55;
@@ -811,6 +816,8 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
       var pb=pin.getBoundingClientRect(), span=pb.height-stage.offsetHeight, pp=Math.max(0,Math.min(1,-(pb.top-60)/span));
       stage.style.setProperty("--pp",pp.toFixed(3));
       var st=Math.min(shots.length-1,Math.floor(pp*shots.length));
+      /* On phones, the text steps aside for the second half of each step so the photo shows on its own. */
+      pinCopy.classList.toggle("reveal",narrow.matches&&(pp*shots.length-st)>0.5);
       if(st!==lastStep){ lastStep=st; shots.forEach(function(s,i){ s.classList.toggle("on",i===st); }); steps.forEach(function(s,i){ s.classList.toggle("on",i===st); }); }
     }
   }
