@@ -30,12 +30,12 @@ img { max-width: 100%; }
   --oak: #1D3A2B;
   --leaf: #C8DBBF;
   --stucco: #A3CBD2;
-  --salvia: #F0674F;
+  --salvia: #EC8068;
   --mist: #EEF3E6;
   --display: "Young Serif", Georgia, "Times New Roman", serif;
   --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
   --latin: "Newsreader", Georgia, serif;
-  --gut: clamp(16px, 5vw, 80px);
+  --gut: clamp(22px, 5.5vw, 80px);
   --rail: 0px;
   --bar: 60px;
   --now: var(--paper);
@@ -127,12 +127,12 @@ main { padding-right: var(--rail); overflow-x: clip; }
 /* The address scales with the space it has, so it always sits on one line. */
 .hero-type { container-type: inline-size; }
 .hero-type h1 { white-space: nowrap; font-size: 9vw; font-size: min(11cqi, 12.5rem); }
-.status-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.status-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
+.status-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; min-width: 0; }
 .badge { display: inline-block; padding: 7px 16px 6px; border-radius: 999px; background: var(--forsythia); color: var(--ink); font-size: .85rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .stage { position: relative; }
 .stage .ph { clip-path: inset(0 calc(var(--w, 1) * 7vw) 0 calc(var(--w, 1) * 7vw)); }
-.hero-salvia { right: 3%; top: -30%; width: clamp(130px, 23vw, 370px); }
-@media (max-width: 640px) { .hero-salvia { top: -9%; right: 7%; width: 112px; } }
+.hero-salvia { flex: 0 0 auto; width: clamp(84px, 14vw, 230px); margin-bottom: -.35em; pointer-events: none; }
 .say { font-family: var(--display); font-size: clamp(1.7rem, 3.9vw, 4rem); line-height: 1.16; max-width: 21em; text-wrap: pretty; }
 .say em { font-style: normal; background: linear-gradient(transparent 62%, var(--forsythia) 62%); }
 
@@ -289,13 +289,15 @@ html.lb-open { overflow: hidden; }
   <section id="top" data-tone="paper">
     <div class="wrap hero-type">
       <div class="status-row">
-        <span class="badge" id="status">Coming soon</span>
-        <p class="label">Austin, Texas 78724</p>
+        <div class="status-meta">
+          <span class="badge" id="status">Coming soon</span>
+          <p class="label">Austin, Texas 78724</p>
+        </div>
+        <div class="hero-salvia" data-plant="autumn" data-depth=".06"></div>
       </div>
       <h1>5520 Toscana Ave</h1>
     </div>
     <div class="stage" id="widen">
-      <div class="float hero-salvia" data-plant="autumn" data-depth=".14"></div>
       <figure class="ph r32 still">
         <img class="shot" src="assets/front-hero.jpg" alt="Blue stucco house with a terracotta tile roof behind a live oak, with native beds along the curb" fetchpriority="high">
       </figure>
@@ -317,7 +319,7 @@ html.lb-open { overflow: hidden; }
     </div>
   </section>
 
-  <section id="arrive" class="band" data-tone="forsythia" data-chapter>
+  <section id="arrive" class="band" data-tone="stucco" data-chapter>
     <div class="wrap head">
       <p class="label">Arrive</p>
       <h2>From the curb.</h2>
@@ -342,7 +344,7 @@ html.lb-open { overflow: hidden; }
     </div>
   </section>
 
-  <section id="work" class="band" data-tone="stucco" data-chapter>
+  <section id="work" class="band" data-tone="forsythia" data-chapter>
     <div class="wrap head">
       <p class="label">Work</p>
       <h2>An office with a door.</h2>
@@ -417,10 +419,10 @@ html.lb-open { overflow: hidden; }
         <figure class="ph"><img class="shot" src="assets/yard-seating.jpg" alt="Mulched seating corner with a raised metal garden bed and potted herbs" loading="lazy"></figure>
         <figure class="ph"><img class="shot" src="assets/yard-house.jpg" alt="Back of the house in blue stucco, seen from beneath the live oak" loading="lazy"></figure>
         <div class="pin-copy">
-          <div class="on"><p class="label">Out back</p><h2>The oak was here first.</h2><p>The fenced yard sits under a mature live oak, with a hackberry in the middle and redbuds along the back.</p></div>
+          <div class="on"><p class="label">Out back</p><h2>A yard with room for everything.</h2><p>Sun, shade, paths and planting beds give the fenced yard distinct spaces to relax, entertain and grow, all under a mature live oak, a hackberry and redbuds.</p></div>
           <div><p class="label">Midday</p><h2>Shade when you want it.</h2><p>A limestone footpath winds past a stone fountain and native beds along the fence, all under the shade of the oak.</p></div>
-          <div><p class="label">Gather</p><h2>A corner for sitting.</h2><p>The mulched back corner fits a small seating area, right beside raised metal beds watered by a soak hose.</p></div>
-          <div><p class="label">Growing</p><h2>Room to grow.</h2><p>Turk's cap lines the back of the house, rosemary grows by the seating corner, and the Ischia fig ripens around August.</p></div>
+          <div><p class="label">Gather</p><h2>Room to grow.</h2><p>The back corner pairs a seating area for friends with raised metal veggie beds on a soak hose, so you can host and harvest in the same spot.</p></div>
+          <div><p class="label">Upkeep</p><h2>Easy to keep up.</h2><p>Drought-tolerant native groundcover stands in for thirsty lawn, and the trees were trimmed in September 2026. The oak also shades the back of the house through the hottest part of the day.</p></div>
         </div>
       </div>
     </div>
