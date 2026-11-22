@@ -42,7 +42,7 @@ img { max-width: 100%; }
   --on: var(--ink);
   color-scheme: light;
 }
-@media (min-width: 1000px) { :root { --rail: 104px; } }
+@media (min-width: 1100px) { :root { --rail: 176px; } }
 html { scroll-behavior: smooth; scroll-padding-top: var(--bar); }
 body {
   margin: 0; background: var(--now); color: var(--on);
@@ -77,20 +77,22 @@ p { margin: 0; }
 
 /* Stem navigation */
 .stem { display: none; }
-@media (min-width: 1000px) {
+@media (min-width: 1100px) {
   .stem { display: block; position: fixed; z-index: 15; right: 0; top: calc(50% + 30px); transform: translateY(-50%); width: var(--rail); }
-  .stem ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 34px; position: relative; }
-  .stem ol::before, .stem ol::after { content: ""; position: absolute; left: 51px; top: 8px; bottom: 8px; width: 1.5px; background: currentColor; opacity: .22; transform-origin: top; }
+  .stem ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; position: relative; }
+  .stem ol::before, .stem ol::after { content: ""; position: absolute; left: 30px; top: 14px; bottom: 14px; width: 1.5px; background: currentColor; opacity: .25; transform-origin: top; }
   .stem ol::after { opacity: 1; transform: scaleY(var(--grown, 0)); }
-  .stem a { position: relative; display: block; height: 16px; text-decoration: none; }
-  .stem a::before { content: ""; position: absolute; left: 44px; top: 0; width: 16px; height: 16px; background: var(--now); border: 1.5px solid currentColor; border-radius: 0 100% 0 100%; transition: background .3s, transform .3s; }
-  .stem li:nth-child(even) a::before { transform: scaleX(-1); }
+  .stem a { position: relative; display: flex; align-items: center; min-height: 28px; padding-left: 52px; font-size: .85rem; font-weight: 500; line-height: 1.2; text-decoration: none; opacity: .78; transition: opacity .2s; }
+  .stem a:hover, .stem a:focus-visible, .stem a.here { opacity: 1; }
+  .stem a.here { font-weight: 700; }
+  .stem a:hover span, .stem a:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
+  /* Each leaf's pointed base sits on the stem; leaves alternate sides. */
+  .stem a::before { content: ""; position: absolute; left: 31px; bottom: 50%; width: 14px; height: 14px; box-sizing: border-box; background: var(--now); border: 1.5px solid currentColor; border-radius: 100% 0 100% 0; transition: background .3s; }
+  .stem li:nth-child(odd) a::before { left: 16px; border-radius: 0 100% 0 100%; }
   .stem a.past::before { background: currentColor; }
   .stem a.home::before { display: none; }
-  .stem a.home svg { position: absolute; left: 37px; top: -8px; width: 30px; height: 30px; z-index: 1; transition: transform .4s ease; }
-  .stem a.home:hover svg, .stem a.home:focus-visible svg { transform: rotate(36deg) scale(1.12); }
-  .stem span { position: absolute; right: 68px; top: -4px; font-size: .8rem; font-weight: 500; white-space: nowrap; padding: 1px 8px; background: var(--now); opacity: 0; transition: opacity .25s; }
-  .stem a.here span, .stem a:hover span, .stem a:focus-visible span { opacity: 1; }
+  .stem a.home svg { position: absolute; left: 16px; top: 50%; width: 30px; height: 30px; z-index: 1; transform: translateY(-50%); transition: transform .4s ease; }
+  .stem a.home:hover svg, .stem a.home:focus-visible svg { transform: translateY(-50%) rotate(36deg) scale(1.12); }
 }
 
 /* Bands */
@@ -147,7 +149,7 @@ main { padding-right: var(--rail); overflow-x: clip; }
 @media (max-width: 900px) { .visit-plant { display: none; } }
 .rest-plant { right: 1%; top: clamp(60px, 7vw, 120px); width: clamp(180px, 21vw, 360px); }
 @media (max-width: 760px) { .rest-plant { display: none; } }
-.arrive-plant { right: 6%; top: -9%; width: clamp(130px, 21vw, 340px); }
+.arrive-art { width: min(100%, 440px); justify-self: center; align-self: center; }
 .intro { padding-top: clamp(56px, 8vw, 120px); display: grid; gap: clamp(36px, 4.5vw, 64px); justify-items: start; }
 .glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(22px, 2.6vw, 36px) clamp(16px, 2.4vw, 36px); margin: 0; width: 100%; border-top: 1.5px solid currentColor; padding-top: clamp(20px, 2vw, 28px); }
 .glance > div { display: grid; gap: 4px; align-content: start; min-width: 0; }
@@ -272,11 +274,23 @@ html.lb-open { overflow: hidden; }
 .yard-copy { position: absolute; left: 0; bottom: 0; z-index: 2; box-sizing: border-box; width: min(100%, 37em); display: grid; gap: 14px; padding: clamp(24px, 3.4vw, 52px); padding-left: max(var(--gut), env(safe-area-inset-left, 0px)); padding-bottom: clamp(40px, 3.4vw, 52px); background: color-mix(in srgb, #12271C 82%, transparent); color: #F4F6EA; will-change: transform; }
 .yard-copy h2 { font-size: clamp(2.3rem, 4.8vw, 5rem); }
 @media (prefers-reduced-motion: reduce) { .yard-step { height: auto; } .yard-stage { position: relative; top: 0; height: 80vh; } }
-@media (min-width: 900px) {
-  .spec-wide { grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr) minmax(0, .75fr) minmax(0, 1.25fr); }
-  .spec-wide dt:nth-of-type(even) { padding-left: clamp(24px, 3vw, 48px); }
+@media (min-width: 1500px) {
+  .spec-wide.nums { grid-template-columns: repeat(3, minmax(0, .7fr) minmax(0, 1.3fr)); }
+  .spec-wide.nums dt:nth-of-type(2n) { padding-left: 0; }
+  .spec-wide.nums dt:not(:nth-of-type(3n+1)) { padding-left: clamp(24px, 2.4vw, 40px); }
 }
-.bullets { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; }
+@media (min-width: 900px) {
+  .spec-wide { grid-template-columns: repeat(2, minmax(0, .75fr) minmax(0, 1.25fr)); }
+  .spec-wide dt:nth-of-type(2n) { padding-left: clamp(24px, 3vw, 48px); }
+}
+.bullets { margin: 0; padding-left: 1.2em; display: grid; gap: 10px 48px; }
+@media (min-width: 760px) { .bullets.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.doc-list { list-style: none; margin: 0; padding: 0; display: grid; column-gap: 32px; }
+.doc-list li { padding: 10px 0; border-top: 1px solid color-mix(in srgb, var(--on) 18%, transparent); }
+.one-line { white-space: nowrap; font-size: min(7.6vw, 8rem); }
+@container (min-width: 1px) { .one-line { font-size: min(9.4cqi, 8rem); } }
+#details .head { container-type: inline-size; }
+.packet { align-self: start; }
 .faq { max-width: 52em; }
 .checklist { list-style: none; margin: 0; padding: 0; }
 .checklist li { padding: 10px 0 10px 28px; border-top: 1px solid color-mix(in srgb, var(--on) 18%, transparent); position: relative; }
@@ -351,22 +365,24 @@ html.lb-open { overflow: hidden; }
       <h2>From the curb.</h2>
       <p class="lede">A blue stucco Tuscan home with a classic terracotta tile roof and a coral front door. A live oak shades the front, and a drought-tolerant native yard reduces lawn maintenance.</p>
     </div>
-    <div class="grid bleed-l">
-      <figure class="ph r32 c8"><img class="shot" data-drift src="assets/front-angle.jpg" style="object-position:100% 50%" alt="The house and two-car garage under the live oak, seen from the driveway" loading="lazy"></figure>
-      <div class="note c4">
-        <h3>Street View</h3>
+    <div class="bleed-l">
+      <figure class="ph r32 fit-m"><img class="shot" data-drift src="assets/entry.jpg" alt="Curved front walk to the coral front door, with shade plantings on either side" loading="lazy"></figure>
+    </div>
+    <div class="grid wrap">
+      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/front-angle.jpg" style="object-position:100% 50%" alt="The house and two-car garage under the live oak, seen from the driveway" loading="lazy"></figure>
+      <div class="note c5">
+        <h3>Street view</h3>
         <ul class="plain">
           <li>Durable concrete tile roof (average life span 50-100 years)</li>
-          <li>2 car garage</li>
-          <li>Mature Live Oak for midday shade</li>
-          <li>Native and drought tolerant full sun and full shade plants</li>
+          <li>2-car garage</li>
+          <li>Mature live oak for midday shade</li>
+          <li>Native and drought-tolerant full sun and full shade plants</li>
         </ul>
       </div>
     </div>
-    <div class="grid wrap" style="position:relative">
+    <div class="grid wrap">
       <figure class="ph r45 c5"><img class="shot" data-drift src="assets/curb-beds.jpg" alt="Native curbside beds with prickly pear, grasses and flowering groundcover" class="pos-curb" loading="lazy"></figure>
-      <figure class="ph r32 c7 fit-m"><img class="shot" data-drift src="assets/entry.jpg" alt="Curved front walk to the coral front door, with shade plantings on either side" loading="lazy"></figure>
-      <div class="float arrive-plant" data-plant="firecracker" data-depth=".08"></div>
+      <div class="c7 arrive-art" data-plant="firecracker" data-depth=".08"></div>
     </div>
   </section>
 
@@ -420,10 +436,11 @@ html.lb-open { overflow: hidden; }
     </div>
     <div class="grid wrap">
       <div class="note c5">
-        <h3>Laundry</h3>
-        <p>A separate laundry room with a supply shelf opens straight into the garage.</p>
+        <h3>Laundry, pantry and storage</h3>
+        <p>The laundry room doubles as a pantry, with shelving for supplies and dry goods, and opens straight into the garage.</p>
+        <p>Storage runs through the whole house: generous closets in every bedroom, a walk-in closet in the primary suite, and built-in shelving and workshop space in the garage. <span class="todo">Confirm pantry and closet details</span></p>
       </div>
-      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/laundry.jpg" alt="Laundry room with washer and dryer hookups, a shelf and a door to the garage" loading="lazy"></figure>
+      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/laundry.jpg" alt="Laundry and pantry room with a supply shelf and a door to the garage" loading="lazy"></figure>
     </div>
   </section>
 
@@ -526,7 +543,7 @@ html.lb-open { overflow: hidden; }
   <section id="details" class="band" data-tone="paper" data-chapter>
     <div class="wrap head">
       <p class="label">Details</p>
-      <h2>All About the Property</h2>
+      <h2 class="one-line">All about the property</h2>
     </div>
     <div class="wrap">
       <dl class="spec spec-wide nums">
@@ -541,6 +558,7 @@ html.lb-open { overflow: hidden; }
         <dt>Exterior</dt><dd>Stucco</dd>
         <dt>Roof</dt><dd>Original concrete tile in a terracotta style, with an expected lifespan of 50+ years</dd>
         <dt>Garage</dt><dd>Attached 2-car, with workshop space and built-in shelving</dd>
+        <dt>Storage</dt><dd>Laundry and pantry room, walk-in primary closet, closets in every bedroom</dd>
         <dt>Heating and cooling</dt><dd>Original 3-ton Rheem system, serviced twice a year, heating and cooling efficiently and reliably</dd>
         <dt>Flooring</dt><dd>Tile in main living areas, carpet in bedrooms</dd>
         <dt>Smart home</dt><dd>Smart thermostat, keyless entry, transferable Wyze security</dd>
@@ -550,20 +568,30 @@ html.lb-open { overflow: hidden; }
         <dt>County</dt><dd>Travis</dd>
       </dl>
     </div>
+    <div class="wrap stack">
+      <h3>Recent work</h3>
+      <ul class="bullets two-col">
+        <li>Three new native plant garden beds</li>
+        <li>Native, heat-tolerant plantings in the curbside strip</li>
+        <li>Mulched seating and vegetable bed area</li>
+        <li>Winding natural limestone path</li>
+        <li>Live oaks trimmed in September 2026</li>
+        <li>Anlin Panoramic windows installed in the living room and dining room in 2025</li>
+        <li>Custom walnut headboard and solid maple floating nightstands</li>
+        <li>New solar shades, curtains, dimmable lighting and fixtures</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="packet" class="band" data-tone="mist">
+    <div class="wrap head">
+      <h2>Buyer information packet</h2>
+      <p class="lede">Disclosures and records are sent by email rather than posted publicly. Share your email and phone and the complete packet will be sent to you.</p>
+    </div>
     <div class="wrap columns">
       <div class="stack">
-        <h3>Recent work</h3>
-        <ul class="bullets">
-          <li>Live oaks trimmed in September 2026</li>
-          <li>Anlin Panoramic windows installed in the living room and dining room in 2025</li>
-          <li>Custom walnut headboard and solid maple floating nightstands</li>
-          <li>New solar shades, curtains, dimmable lighting and fixtures</li>
-        </ul>
-      </div>
-      <div class="stack">
-        <h3>Buyer information packet</h3>
-        <p>Disclosures and records are sent by email rather than posted publicly. The packet includes:</p>
-        <ul class="checklist">
+        <h3>What's included</h3>
+        <ul class="doc-list">
           <li>Seller's disclosure notice</li>
           <li>Survey and T-47 affidavit</li>
           <li>Most recent property tax bill</li>
@@ -575,13 +603,13 @@ html.lb-open { overflow: hidden; }
           <li>Offer instructions</li>
           <li>Garden care guide</li>
         </ul>
-        <form class="form packet" id="packetForm">
-          <label for="p-email" class="full">Email<input id="p-email" name="email" type="email" autocomplete="email" required></label>
-          <label for="p-phone" class="full">Phone<input id="p-phone" name="phone" type="tel" autocomplete="tel" required></label>
-          <button class="send" type="submit">Request the Complete Buyer Information Packet</button>
-          <p class="fine full" id="packetNote" role="status">This form is a preview and does not send anything yet.</p>
-        </form>
       </div>
+      <form class="form packet" id="packetForm">
+        <label for="p-email" class="full">Email<input id="p-email" name="email" type="email" autocomplete="email" required></label>
+        <label for="p-phone" class="full">Phone<input id="p-phone" name="phone" type="tel" autocomplete="tel" required></label>
+        <button class="send" type="submit">Request the Complete Buyer Information Packet</button>
+        <p class="fine full" id="packetNote" role="status">This form is a preview and does not send anything yet.</p>
+      </form>
     </div>
   </section>
 
@@ -857,7 +885,7 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Scroll: color, stem, parallax, pinned story ---------- */
   var root=getComputedStyle(document.documentElement);
-  var tones={ paper:["--paper","--ink"], forsythia:["--forsythia","--ink"], gaura:["--gaura","--ink"], stucco:["--stucco","--ink"], oak:["--oak","--paper"], leaf:["--leaf","--ink"], salvia:["--salvia","--ink"] };
+  var tones={ paper:["--paper","--ink"], forsythia:["--forsythia","--ink"], gaura:["--gaura","--ink"], stucco:["--stucco","--ink"], oak:["--oak","--paper"], leaf:["--leaf","--ink"], salvia:["--salvia","--ink"], mist:["--mist","--ink"] };
   var toned=[].slice.call(document.querySelectorAll("[data-tone]"));
   var chapters=[].slice.call(document.querySelectorAll("[data-chapter]"));
   var links=[].slice.call(document.querySelectorAll("#stem a:not(.home)")), stem=document.getElementById("stem");
@@ -870,7 +898,7 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
     for(var i=0;i<toned.length;i++){ var b=toned[i].getBoundingClientRect(); if(b.top<=line&&b.bottom>line){ setTone(toned[i].dataset.tone); break; } }
     var idx=-1, frac=0;
     chapters.forEach(function(c,i){ var b=c.getBoundingClientRect(); if(b.top<=line){ idx=i; frac=Math.min(1,(line-b.top)/b.height); } });
-    links.forEach(function(a,i){ a.classList.toggle("past",i<=idx); a.classList.toggle("here",i===idx); });
+    links.forEach(function(a,i){ a.classList.toggle("past",i<=idx); a.classList.toggle("here",i===idx); if(i===idx) a.setAttribute("aria-current","location"); else a.removeAttribute("aria-current"); });
     document.querySelector("#stem a.home").classList.toggle("here",idx<0);
     stem.style.setProperty("--grown",idx<0?0:Math.min(1,(idx+frac)/(chapters.length-1)));
     if(!calm){
