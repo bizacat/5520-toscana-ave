@@ -27,7 +27,7 @@
   --on: var(--ink);
   color-scheme: light;
 }
-@media (min-width: 1100px) { :root { --rail: 176px; } }
+@media (min-width: 1100px) { :root { --rail: 228px; } }
 html { scroll-behavior: smooth; scroll-padding-top: var(--bar); }
 body {
   margin: 0; background: var(--now); color: var(--on);
@@ -64,20 +64,21 @@ p { margin: 0; }
 .stem { display: none; }
 @media (min-width: 1100px) {
   .stem { display: block; position: fixed; z-index: 15; right: 0; top: calc(50% + 30px); transform: translateY(-50%); width: var(--rail); }
-  .stem ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; position: relative; }
-  .stem ol::before, .stem ol::after { content: ""; position: absolute; left: 30px; top: 14px; bottom: 14px; width: 1.5px; background: currentColor; opacity: .25; transform-origin: top; }
+  .stem ol { list-style: none; margin: 0; padding: 18px 0 0; display: grid; gap: 4px; position: relative; }
+  .stem ol::before, .stem ol::after { content: ""; position: absolute; left: calc(50% - .75px); top: 18px; bottom: 14px; width: 1.5px; background: currentColor; opacity: .3; transform-origin: top; }
   .stem ol::after { opacity: 1; transform: scaleY(var(--grown, 0)); }
-  .stem a { position: relative; display: flex; align-items: center; min-height: 28px; padding-left: 52px; font-size: .85rem; font-weight: 500; line-height: 1.2; text-decoration: none; opacity: .78; transition: opacity .2s; }
-  .stem a:hover, .stem a:focus-visible, .stem a.here { opacity: 1; }
-  .stem a.here { font-weight: 700; }
+  /* Leaves alternate sides; each one grows from the stem at its pointed base and holds its label. */
+  .stem li { position: relative; display: flex; }
+  .stem li:nth-child(even) { padding-left: 50%; justify-content: flex-start; }
+  .stem li:nth-child(odd) { padding-right: 50%; justify-content: flex-end; }
+  .stem a { display: inline-flex; align-items: center; min-height: 30px; padding: 4px 16px; box-sizing: border-box; font-size: .8rem; font-weight: 600; line-height: 1.1; white-space: nowrap; text-decoration: none; border: 1.5px solid currentColor; background: var(--now); transition: background .3s, color .3s; }
+  .stem li:nth-child(even) a { border-radius: 999px 0 999px 0; transform-origin: left bottom; transform: rotate(-7deg); }
+  .stem li:nth-child(odd) a { border-radius: 0 999px 0 999px; transform-origin: right bottom; transform: rotate(7deg); }
+  .stem a.past { background: color-mix(in srgb, currentColor 16%, var(--now)); }
+  .stem a.here { background: currentColor; }
+  .stem a.here span { color: var(--now); }
   .stem a:hover span, .stem a:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
-  /* Each leaf's pointed base sits on the stem; leaves alternate sides. */
-  .stem a::before { content: ""; position: absolute; left: 31px; bottom: 50%; width: 14px; height: 14px; box-sizing: border-box; background: var(--now); border: 1.5px solid currentColor; border-radius: 100% 0 100% 0; transition: background .3s; }
-  .stem li:nth-child(odd) a::before { left: 16px; border-radius: 0 100% 0 100%; }
-  .stem a.past::before { background: currentColor; }
-  .stem a.home::before { display: none; }
-  .stem a.home svg { position: absolute; left: 16px; top: 50%; width: 30px; height: 30px; z-index: 1; transform: translateY(-50%); transition: transform .4s ease; }
-  .stem a.home:hover svg, .stem a.home:focus-visible svg { transform: translateY(-50%) rotate(36deg) scale(1.12); }
+  .stem .pear { position: absolute; left: calc(50% - 17px); top: -22px; width: 34px; height: 34px; z-index: 1; pointer-events: none; }
 }
 
 /* Bands */
@@ -300,15 +301,15 @@ html.lb-open { overflow: hidden; }
 
 <nav class="stem" aria-label="Chapters">
   <ol id="stem">
-    <li><a class="home" href="#top" aria-label="Back to the top"><svg viewBox="-16 -16 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cy="-8.6" rx="5.2" ry="7"/><ellipse cy="-8.6" rx="5.2" ry="7" transform="rotate(72)"/><ellipse cy="-8.6" rx="5.2" ry="7" transform="rotate(144)"/><ellipse cy="-8.6" rx="5.2" ry="7" transform="rotate(216)"/><ellipse cy="-8.6" rx="5.2" ry="7" transform="rotate(288)"/></g><circle r="3.3" style="fill:var(--now)"/></svg><span>Home</span></a></li>
+    <li class="home-item"><a class="home" href="#top"><span>Home</span></a><svg class="pear" viewBox="0 0 32 32" aria-hidden="true"><g fill="currentColor"><ellipse cx="16" cy="22" rx="7" ry="9.5"/><ellipse cx="24.2" cy="12.6" rx="4.4" ry="6" transform="rotate(28 24.2 12.6)"/><ellipse cx="7.8" cy="13.4" rx="4" ry="5.4" transform="rotate(-28 7.8 13.4)"/></g><g style="fill:var(--now)"><circle cx="13.5" cy="19" r=".75"/><circle cx="18.5" cy="22" r=".75"/><circle cx="14.5" cy="26" r=".75"/><circle cx="24" cy="11.5" r=".65"/><circle cx="8" cy="12.5" r=".65"/></g><g fill="#E8B547"><ellipse cx="16" cy="8.4" rx="1.7" ry="2.8"/><ellipse cx="16" cy="8.4" rx="1.7" ry="2.8" transform="rotate(-38 16 11)"/><ellipse cx="16" cy="8.4" rx="1.7" ry="2.8" transform="rotate(38 16 11)"/></g></svg></li>
     <li><a href="#arrive"><span>Arrive</span></a></li>
     <li><a href="#work"><span>Work</span></a></li>
     <li><a href="#inside"><span>Inside</span></a></li>
     <li><a href="#rest"><span>Rest</span></a></li>
-    <li><a href="#outback"><span>Out back</span></a></li>
-    <li><a href="#garden"><span>Garden</span></a></li>
+    <li><a href="#outback"><span>Outside</span></a></li>
     <li><a href="#nearby"><span>Nearby</span></a></li>
     <li><a href="#details"><span>Details</span></a></li>
+    <li><a href="#packet"><span>Buyer info</span></a></li>
     <li><a href="#visit"><span>Visit</span></a></li>
   </ol>
 </nav>
@@ -472,7 +473,7 @@ html.lb-open { overflow: hidden; }
     </div>
   </section>
 
-  <section id="garden" class="band" data-tone="leaf" data-chapter>
+  <section id="garden" class="band" data-tone="leaf">
     <div class="wrap head">
       <p class="label">Garden</p>
       <h2>A field guide to the yard.</h2>
@@ -568,7 +569,7 @@ html.lb-open { overflow: hidden; }
     </div>
   </section>
 
-  <section id="packet" class="band" data-tone="mist">
+  <section id="packet" class="band" data-tone="mist" data-chapter>
     <div class="wrap head">
       <h2>Buyer information packet</h2>
       <p class="lede">Disclosures and records are sent by email rather than posted publicly. Share your email and phone and the complete packet will be sent to you.</p>
