@@ -283,7 +283,7 @@ html.lb-open { overflow: hidden; }
 .season { display: grid; align-content: start; gap: 10px; padding: clamp(20px, 2.2vw, 28px); background: var(--oak); color: #F4F6EA; border-radius: 6px; }
 .season h3 { font-size: 1.6rem; }
 .season .label { color: var(--leaf); }
-.zone { display: grid; background: var(--paper); border-radius: 6px; overflow: hidden; }
+.zone { display: grid; background: color-mix(in srgb, var(--leaf) 55%, var(--paper)); border-radius: 6px; overflow: hidden; }
 .zone-head { display: grid; gap: 8px; padding: clamp(20px, 2.6vw, 36px); background: var(--oak); color: #F4F6EA; }
 .zone-head .label { color: var(--leaf); }
 .zone-head p:last-child { max-width: 44em; }
@@ -294,6 +294,30 @@ html.lb-open { overflow: hidden; }
 .zone-facts dd { margin: 0; }
 .zone-plants { list-style: none; margin: 0; padding: 0; columns: 2 150px; column-gap: 24px; }
 .zone-plants li { padding: 5px 0; break-inside: avoid; border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+.glossary { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 20px; }
+.gcard { display: grid; grid-template-rows: auto 1fr; background: color-mix(in srgb, var(--leaf) 55%, var(--paper)); border-radius: 6px; overflow: hidden; }
+.gart { aspect-ratio: 1; display: grid; place-items: center; padding: 16px; background: color-mix(in srgb, var(--leaf) 85%, var(--oak)); }
+.gart .specimen { width: 100%; height: 100%; }
+.gart img.specimen { object-fit: contain; }
+.gph { display: grid; justify-items: center; gap: 8px; color: color-mix(in srgb, var(--oak) 55%, transparent); font-size: .8rem; font-weight: 500; }
+.gph svg { width: 52px; height: 52px; }
+.gbody { display: grid; align-content: start; gap: 4px; padding: 16px 18px 20px; }
+.gbody .label { font-size: .7rem; opacity: .75; }
+.gbody h3 { font-size: 1.35rem; }
+.gbody dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 12px; margin: 10px 0 0; font-size: .9rem; line-height: 1.35; }
+.gbody dt { opacity: .7; }
+.gbody dd { margin: 0; }
+@media (max-width: 640px) {
+  .glossary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .gart { padding: 10px; }
+  .gph span { display: none; }
+  .gbody { padding: 12px 12px 14px; }
+  .gbody h3 { font-size: 1.1rem; }
+  .gbody .latin { font-size: .95rem; }
+  .gbody dl { grid-template-columns: minmax(0, 1fr); gap: 0; font-size: .85rem; }
+  .gbody dt { font-size: .7rem; letter-spacing: .04em; text-transform: uppercase; }
+  .gbody dd { margin-bottom: 8px; }
+}
 .intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 .intro-lead { display: grid; grid-template-columns: minmax(0, 1fr) clamp(76px, 22vw, 340px); align-items: end; gap: clamp(12px, 3vw, 48px); width: 100%; }
 .plan-wrap { display: grid; gap: 20px; justify-items: center; text-align: center; }
@@ -556,8 +580,7 @@ html.lb-open { overflow: hidden; }
     <div class="wrap plates peek" id="peek"></div>
     <div class="wrap">
       <div class="intro-actions">
-        <a class="more" href="#plants" id="moreLink">See every plant</a>
-        <a class="go" href="#care">Garden care guide</a>
+        <a class="more" href="#care" id="moreLink">Plant and garden guide</a>
       </div>
     </div>
   </section>
@@ -812,10 +835,12 @@ html.lb-open { overflow: hidden; }
         </article>
     </div>
     <div class="wrap care-block">
-      <h2>Plant profiles</h2>
-      <div class="plates" id="carePlates"></div>
+      <h2>Plant glossary</h2>
+      <p class="lede">Every plant in the yard, A to Z. Illustrations are placeholders until each plant is drawn from photos of the garden.</p>
+      <p class="fine"><span class="todo">Bloom, winter and water notes are general Central Texas guidance. Confirm against your experience.</span></p>
+      <div class="glossary" id="glossary"></div>
     </div>
-    <div class="wrap intro-actions"><a class="more" href="#plants">See every plant</a><a class="go" href="#visit">Book a showing</a></div>
+    <div class="wrap intro-actions"><a class="more" href="#visit">Book a showing</a><a class="go" href="#garden">Back to the house</a></div>
   </section>
 </main>
 
@@ -1002,10 +1027,15 @@ html.lb-open { overflow: hidden; }
   var unique={};
   yard.forEach(function(g){ g.beds.forEach(function(b){ b.p.forEach(function(x){ unique[x.split("|")[0]]=1; }); }); });
   var plantTotal=Object.keys(unique).length;
-  document.getElementById("moreLink").textContent="See all "+plantTotal+" plants, with care notes";
   document.getElementById("peek").innerHTML=["autumn","rainbow","firecracker"].map(function(id){ return plateHTML(plants.filter(function(p){ return p.id===id; })[0],true); }).join("");
+  /* Plant glossary for the care guide. "a" names an illustration; plants without one show a placeholder. */
+  var glossary=[{"n": "Red yucca", "l": "Hesperaloe parviflora", "z": "Front, full sun", "b": "April to October", "w": "Evergreen", "s": "Rarely, once established", "a": null}, {"n": "Yellow yucca", "l": "Hesperaloe parviflora, yellow form", "z": "Front, full sun", "b": "April to October", "w": "Evergreen", "s": "Rarely, once established", "a": null}, {"n": "Trailing lantana", "l": "Lantana montevidensis", "z": "Front, full sun", "b": "Spring until frost", "w": "Dies back in frost, returns in spring", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Coreopsis", "l": "Coreopsis", "z": "Front, full sun", "b": "April to June", "w": "Leafy rosette stays through winter", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Damianita daisy", "l": "Chrysactinia mexicana", "z": "Front, full sun", "b": "Spring to fall", "w": "Evergreen", "s": "Rarely, once established", "a": null}, {"n": "Firecracker fern", "l": "Russelia equisetiformis", "z": "Front, full sun", "b": "Spring until frost", "w": "Dies back in frost, returns in spring", "s": "Weekly", "a": "firecracker"}, {"n": "Woolly globe mallow", "l": "Sphaeralcea", "z": "Front, full sun", "b": "Spring to fall", "w": "Mostly evergreen", "s": "Rarely, once established", "a": null}, {"n": "Spineless prickly pear", "l": "Opuntia ellisiana", "z": "Front, full sun", "b": "April to May", "w": "Evergreen", "s": "None needed", "a": null}, {"n": "White mistflower", "l": "Ageratina havanensis", "z": "Front, full sun", "b": "September to November", "w": "Drops some leaves in winter", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Autumn sage", "l": "Salvia greggii", "z": "Front, full sun and back corner", "b": "Spring through fall", "w": "Evergreen in mild winters", "s": "Every 1 to 2 weeks", "a": "autumn"}, {"n": "Purple skullcap", "l": "Scutellaria wrightii", "z": "Front, full sun", "b": "Spring to fall", "w": "Evergreen", "s": "Rarely, once established", "a": null}, {"n": "Rock rose", "l": "Pavonia lasiopetala", "z": "Front, full sun", "b": "Spring to fall", "w": "Dies back in frost, returns in spring", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Winecup", "l": "Callirhoe involucrata", "z": "Front, full sun", "b": "March to June", "w": "Rests in summer, returns in fall", "s": "Rarely, once established", "a": null}, {"n": "Mexican marigold", "l": "Tagetes, species to confirm", "z": "Front, full sun", "b": "Fall", "w": "Dies back in frost, returns in spring", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Yellow pride of Barbados", "l": "Caesalpinia pulcherrima", "z": "Front, full sun", "b": "Summer to fall", "w": "Dies back in frost, returns in spring", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Cast iron plant", "l": "Aspidistra elatior", "z": "Front, deep shade", "b": "Rarely flowers", "w": "Evergreen", "s": "Weekly", "a": null}, {"n": "Texas holly fern", "l": "Holly fern", "z": "Front, deep shade", "b": "Does not flower", "w": "Evergreen", "s": "Weekly", "a": null}, {"n": "Live oak", "l": "Quercus virginiana", "z": "Trees, front and back", "b": "Catkins in spring", "w": "Evergreen; sheds old leaves in spring", "s": "Rarely, once established", "a": "oak"}, {"n": "Redbud", "l": "Cercis canadensis var. texensis", "z": "Trees, back", "b": "February to March", "w": "Loses its leaves in winter", "s": "Rarely, once established", "a": null}, {"n": "Crossvine", "l": "Bignonia capreolata", "z": "Back corner bed", "b": "March to May", "w": "Mostly evergreen", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Esperanza yellow bells", "l": "Tecoma stans", "z": "Back corner bed", "b": "Summer to fall", "w": "Dies back in frost, returns in spring", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Gregg's blue mistflower", "l": "Conoclinium greggii", "z": "Back corner bed", "b": "Summer to fall", "w": "Dies back in frost, returns in spring", "s": "Weekly", "a": null}, {"n": "Ischia fig", "l": "Ficus carica", "z": "Back corner bed", "b": "Fruit ripens around August", "w": "Loses its leaves in winter", "s": "Weekly", "a": null}, {"n": "Gold lantana", "l": "Lantana", "z": "Back corner bed", "b": "Spring until frost", "w": "Dies back in frost, returns in spring", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Flame acanthus", "l": "Anisacanthus quadrifidus var. wrightii", "z": "Back corner bed", "b": "Summer to fall", "w": "Loses its leaves in winter", "s": "Rarely, once established", "a": null}, {"n": "Turk's cap", "l": "Malvaviscus arboreus var. drummondii", "z": "Back of the house", "b": "Summer to fall", "w": "Dies back in frost, returns in spring", "s": "Weekly", "a": null}, {"n": "Pink Turk's cap", "l": "Malvaviscus arboreus, pink form", "z": "Back of the house", "b": "Summer to fall", "w": "Dies back in frost, returns in spring", "s": "Weekly", "a": null}, {"n": "Big Momma Turk's cap", "l": "Malvaviscus 'Big Momma'", "z": "Back of the house", "b": "Summer to fall", "w": "Dies back in frost, returns in spring", "s": "Weekly", "a": null}, {"n": "Forsythia sage", "l": "Salvia madrensis", "z": "Spot to confirm", "b": "Late summer to fall", "w": "Dies back in frost, returns in spring", "s": "Weekly", "a": "forsythia"}, {"n": "White gaura", "l": "Oenothera lindheimeri", "z": "Spot to confirm", "b": "Spring through late fall", "w": "Dies back in very cold weather, grows back", "s": "Every 1 to 2 weeks", "a": "white"}, {"n": "Rainbow gaura", "l": "Oenothera lindheimeri", "z": "Spot to confirm", "b": "Spring through late fall", "w": "Dies back in very cold weather, grows back", "s": "Every 1 to 2 weeks", "a": "rainbow"}, {"n": "Calylophus", "l": "Calylophus", "z": "Spot to confirm", "b": "Spring through summer", "w": "Mostly evergreen", "s": "Rarely, once established", "a": "yellow"}, {"n": "Dwarf palmetto", "l": "Sabal minor", "z": "Spot to confirm", "b": "Does not flower showily", "w": "Evergreen", "s": "Every 1 to 2 weeks", "a": null}, {"n": "Rosemary", "l": "Salvia rosmarinus", "z": "Raised beds", "b": "Winter to spring", "w": "Evergreen", "s": "Rarely, once established", "a": null}];
+  document.getElementById("moreLink").textContent="See all "+glossary.length+" plants and their care";
   function buildCare(){
-    document.getElementById("carePlates").innerHTML=plants.map(function(p){ return plateHTML(p,false); }).join("");
+    var leaf='<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 38C10 20 22 10 38 10c0 16-10 28-28 28ZM10 38L30 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    document.getElementById("glossary").innerHTML=glossary.slice().sort(function(x,y){ return x.n.localeCompare(y.n); }).map(function(p){
+      return '<article class="gcard"><div class="gart"'+(p.a?' data-plant="'+p.a+'"':'')+'>'+(p.a?'':'<div class="gph">'+leaf+'<span>Illustration coming</span></div>')+'</div><div class="gbody"><p class="label">'+p.z+'</p><h3>'+p.n+'</h3><p class="latin">'+p.l+'</p><dl><dt>Blooms</dt><dd>'+p.b+'</dd><dt>Winter</dt><dd>'+p.w+'</dd><dt>Summer water</dt><dd>'+p.s+'</dd></dl></div></article>';
+    }).join("");
     document.querySelectorAll("#viewCare [data-plant]").forEach(function(el){ el.innerHTML=art(el.dataset.plant); });
   }
   function buildAllPlants(){
@@ -1065,7 +1095,7 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
   /* The full plant list is its own page at #plants. */
   var viewHome=document.getElementById("viewHome"), viewPlants=document.getElementById("viewPlants"), viewCare=document.getElementById("viewCare"), built=false, builtCare=false, wasPlants=false;
   function route(){
-    var view=location.hash==="#plants"?"plants":location.hash==="#care"?"care":"", on=!!view;
+    var view=(location.hash==="#care"||location.hash==="#plants")?"care":"", on=!!view;
     if(view==="plants"&&!built){ built=true; buildAllPlants(); }
     if(view==="care"&&!builtCare){ builtCare=true; buildCare(); }
     viewHome.hidden=on; viewPlants.hidden=view!=="plants"; viewCare.hidden=view!=="care"; document.body.classList.toggle("on-plants",on);
