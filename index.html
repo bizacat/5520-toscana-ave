@@ -42,7 +42,7 @@ img { max-width: 100%; }
   --on: var(--ink);
   color-scheme: light;
 }
-@media (min-width: 1100px) { :root { --rail: 228px; } }
+@media (min-width: 1100px) { :root { --rail: 176px; } }
 html { scroll-behavior: smooth; scroll-padding-top: var(--bar); }
 body {
   margin: 0; background: var(--now); color: var(--on);
@@ -72,6 +72,16 @@ p { margin: 0; }
   padding-right: max(var(--gut), env(safe-area-inset-right, 0px));
 }
 .bar-links { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 28px); }
+.menu-btn { appearance: none; display: grid; place-items: center; width: 44px; height: 44px; margin-right: -10px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+.menu-btn .i-close, .menu-btn.open .i-open { display: none; }
+.menu-btn.open .i-close { display: block; }
+.mnav { position: fixed; z-index: 19; left: 0; right: 0; top: calc(env(safe-area-inset-top, 0px) + var(--bar)); max-height: calc(100vh - var(--bar)); max-height: calc(100svh - var(--bar)); overflow-y: auto; background: var(--now); box-shadow: 0 18px 30px -18px rgba(23, 37, 29, .45); padding-left: max(var(--gut), env(safe-area-inset-left, 0px)); padding-right: max(var(--gut), env(safe-area-inset-right, 0px)); padding-block: 8px 24px; }
+.mnav ul { list-style: none; margin: 0; padding: 0; }
+.mnav a { display: block; padding: 12px 0; font-family: var(--display); font-size: 1.6rem; line-height: 1.2; text-decoration: none; border-top: 1px solid color-mix(in srgb, var(--on) 16%, transparent); }
+.mnav li:first-child a { border-top: 0; }
+.mnav a[aria-current] { text-decoration: underline; text-underline-offset: 6px; }
+@media (min-width: 1100px) { .menu-btn, .mnav { display: none !important; } }
+@media (max-width: 599px) { .bar-details { display: none; } }
 .mark { font-family: var(--display); font-size: 1.2rem; text-decoration: none; }
 .go { font-size: .95rem; font-weight: 600; text-underline-offset: 4px; }
 
@@ -79,21 +89,20 @@ p { margin: 0; }
 .stem { display: none; }
 @media (min-width: 1100px) {
   .stem { display: block; position: fixed; z-index: 15; right: 0; top: calc(50% + 30px); transform: translateY(-50%); width: var(--rail); }
-  .stem ol { list-style: none; margin: 0; padding: 18px 0 0; display: grid; gap: 4px; position: relative; }
-  .stem ol::before, .stem ol::after { content: ""; position: absolute; left: calc(50% - .75px); top: 18px; bottom: 14px; width: 1.5px; background: currentColor; opacity: .3; transform-origin: top; }
+  .stem ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; position: relative; }
+  .stem ol::before, .stem ol::after { content: ""; position: absolute; left: 30px; top: 14px; bottom: 14px; width: 1.5px; background: currentColor; opacity: .25; transform-origin: top; }
   .stem ol::after { opacity: 1; transform: scaleY(var(--grown, 0)); }
-  /* Leaves alternate sides; each one grows from the stem at its pointed base and holds its label. */
-  .stem li { position: relative; display: flex; }
-  .stem li:nth-child(even) { padding-left: 50%; justify-content: flex-start; }
-  .stem li:nth-child(odd) { padding-right: 50%; justify-content: flex-end; }
-  .stem a { display: inline-flex; align-items: center; min-height: 30px; padding: 4px 16px; box-sizing: border-box; font-size: .8rem; font-weight: 600; line-height: 1.1; white-space: nowrap; text-decoration: none; border: 1.5px solid currentColor; background: var(--now); transition: background .3s, color .3s; }
-  .stem li:nth-child(even) a { border-radius: 999px 0 999px 0; transform-origin: left bottom; transform: rotate(-7deg); }
-  .stem li:nth-child(odd) a { border-radius: 0 999px 0 999px; transform-origin: right bottom; transform: rotate(7deg); }
-  .stem a.past { background: color-mix(in srgb, currentColor 16%, var(--now)); }
-  .stem a.here { background: currentColor; }
-  .stem a.here span { color: var(--now); }
+  .stem li { position: relative; }
+  .stem a { position: relative; display: flex; align-items: center; min-height: 28px; padding-left: 52px; font-size: .85rem; font-weight: 500; line-height: 1.2; text-decoration: none; opacity: .78; transition: opacity .2s; }
+  .stem a:hover, .stem a:focus-visible, .stem a.here { opacity: 1; }
+  .stem a.here { font-weight: 700; }
   .stem a:hover span, .stem a:focus-visible span { text-decoration: underline; text-underline-offset: 3px; }
-  .stem .pear { position: absolute; left: calc(50% - 17px); top: -22px; width: 34px; height: 34px; z-index: 1; pointer-events: none; }
+  /* Each leaf's pointed base sits on the stem, centred on its label; leaves alternate sides. */
+  .stem a::before { content: ""; position: absolute; left: 31px; top: calc(50% - 7px); width: 14px; height: 14px; box-sizing: border-box; background: var(--now); border: 1.5px solid currentColor; border-radius: 100% 0 100% 0; transition: background .3s; }
+  .stem li:nth-child(odd) a::before { left: 16px; border-radius: 0 100% 0 100%; }
+  .stem a.past::before { background: currentColor; }
+  .stem a.home::before { display: none; }
+  .stem .pear { position: absolute; left: 13px; top: 50%; width: 34px; height: 34px; z-index: 1; transform: translateY(-50%); pointer-events: none; }
 }
 
 /* Bands */
@@ -265,6 +274,7 @@ html.lb-open { overflow: hidden; }
 .form .full { grid-column: 1 / -1; }
 .send { justify-self: start; font: 600 1.1rem var(--body); background: var(--forsythia); color: var(--ink); border: 0; padding: 16px 32px; cursor: pointer; border-radius: 999px; }
 .place { margin-top: -8px; }
+.intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; }
 .intro-lead { display: grid; grid-template-columns: minmax(0, 1fr) clamp(76px, 22vw, 340px); align-items: end; gap: clamp(12px, 3vw, 48px); width: 100%; }
 .plan-wrap { display: grid; gap: 20px; }
 .plan-wrap .plan { width: min(100%, 680px); }
@@ -311,8 +321,30 @@ html.lb-open { overflow: hidden; }
 
 <header class="bar">
   <a class="mark" href="#top">5520 Toscana</a>
-  <div class="bar-links"><a class="go" href="#details">Details</a><a class="go" href="#visit">Book a showing</a></div>
+  <div class="bar-links">
+    <a class="go bar-details" href="#details">Details</a>
+    <a class="go" href="#visit">Book a showing</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu">
+      <svg class="i-open" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="i-close" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
 </header>
+<nav class="mnav" id="mnav" aria-label="Sections" hidden>
+  <ul>
+    <li><a href="#top">Home</a></li>
+    <li><a href="#arrive">Arrive</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#inside">Inside</a></li>
+    <li><a href="#rest">Rest</a></li>
+    <li><a href="#outback">Outside</a></li>
+    <li><a href="#nearby">Nearby</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#packet">Buyer info</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
 
 <nav class="stem" aria-label="Chapters">
   <ol id="stem">
@@ -356,7 +388,10 @@ html.lb-open { overflow: hidden; }
         <div><dt>Parking</dt><dd>2-car garage</dd></div>
         <div><dt>Built</dt><dd>2006, one story</dd></div>
       </dl>
-      <a class="more" href="#details">View More Details</a>
+      <div class="intro-actions">
+        <a class="more" href="#visit">Book a Showing</a>
+        <a class="go" href="#details">View More Details</a>
+      </div>
     </div>
   </section>
 
@@ -954,6 +989,13 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
   var touchX=null;
   lb.addEventListener("touchstart",function(e){ touchX=e.touches[0].clientX; },{passive:true});
   lb.addEventListener("touchend",function(e){ if(touchX===null) return; var dx=e.changedTouches[0].clientX-touchX; touchX=null; if(Math.abs(dx)>40) show(at+(dx<0?1:-1)); });
+
+  /* Small-screen menu */
+  var menuBtn=document.getElementById("menuBtn"), mnav=document.getElementById("mnav"), mlinks=[].slice.call(mnav.querySelectorAll("a"));
+  function setMenu(open){ mnav.hidden=!open; menuBtn.setAttribute("aria-expanded",open?"true":"false"); menuBtn.setAttribute("aria-label",open?"Close menu":"Menu"); menuBtn.classList.toggle("open",open); if(open){ var here=location.hash||"#top"; mlinks.forEach(function(a){ if(a.getAttribute("href")===here) a.setAttribute("aria-current","location"); else a.removeAttribute("aria-current"); }); mlinks[0].focus(); } }
+  menuBtn.addEventListener("click",function(){ setMenu(mnav.hidden); });
+  mnav.addEventListener("click",function(e){ if(e.target.closest("a")) setMenu(false); });
+  addEventListener("keydown",function(e){ if(e.key==="Escape"&&!mnav.hidden){ setMenu(false); menuBtn.focus(); } });
 
   document.getElementById("packetForm").addEventListener("submit",function(e){ e.preventDefault(); document.getElementById("packetNote").textContent="Preview only. Nothing was sent. Connect a form service before launch."; });
   document.getElementById("form").addEventListener("submit",function(e){ e.preventDefault(); document.getElementById("formNote").textContent="Preview only. Nothing was sent. Connect a form service before launch."; });
