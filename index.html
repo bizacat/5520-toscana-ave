@@ -111,7 +111,7 @@ p { margin: 0; }
 /* Bands */
 main { padding-right: var(--rail); overflow-x: clip; }
 .wrap { padding-left: max(var(--gut), env(safe-area-inset-left, 0px)); padding-right: max(var(--gut), env(safe-area-inset-right, 0px)); }
-.band { position: relative; padding-block: clamp(96px, 15vw, 230px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(56px, 8vw, 128px); }
+.band { position: relative; padding-block: clamp(77px, 12vw, 184px); display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(56px, 8vw, 128px); }
 .head { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(20px, 2.6vw, 40px); }
 .reach > div { min-width: 0; }
 
@@ -314,6 +314,10 @@ html.lb-open { overflow: hidden; }
   .spec-wide { grid-template-columns: repeat(2, minmax(0, .75fr) minmax(0, 1.25fr)); }
   .spec-wide dt:nth-of-type(2n) { padding-left: clamp(24px, 3vw, 48px); }
 }
+/* No rule above the first row of facts, however many columns are showing. */
+.spec-wide > :nth-child(-n+2) { border-top: 0; }
+@media (min-width: 900px) { .spec-wide > :nth-child(-n+4) { border-top: 0; } }
+@media (min-width: 1500px) { .spec-wide.nums > :nth-child(-n+6) { border-top: 0; } }
 .bullets { margin: 0; padding-left: 1.2em; display: grid; gap: 10px 48px; }
 @media (min-width: 760px) { .bullets.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .doc-list { list-style: none; margin: 0; padding: 0; display: grid; column-gap: 32px; }
@@ -611,7 +615,7 @@ html.lb-open { overflow: hidden; }
         <dt>Bathrooms</dt><dd>2 full</dd>
         <dt>Living area</dt><dd>1,289 sq ft</dd>
         <dt>Ceilings</dt><dd>10 ft</dd>
-        <dt>Lot</dt><dd>0.1407 acres, fenced</dd>
+        <dt>Lot</dt><dd>0.14 acres, fenced</dd>
         <dt>Built</dt><dd>2006</dd>
         <dt>Stories</dt><dd>1</dd>
         <dt>Exterior</dt><dd>Stucco</dd>
@@ -621,7 +625,7 @@ html.lb-open { overflow: hidden; }
         <dt>Heating and cooling</dt><dd>Original 3-ton Rheem system, serviced twice a year, heating and cooling efficiently and reliably</dd>
         <dt>Flooring</dt><dd>Tile in main living areas, carpet in bedrooms</dd>
         <dt>Smart home</dt><dd>Smart thermostat, keyless entry, transferable Wyze security</dd>
-        <dt>POA dues</dt><dd>Agave POA, $70 per quarter</dd>
+        <dt>Agave POA</dt><dd>$70 per quarter</dd>
         <dt>Property tax</dt><dd>$6,841 (2024) <span class="todo">Update</span></dd>
         <dt>School district</dt><dd>Manor ISD</dd>
         <dt>County</dt><dd>Travis</dd>
@@ -635,9 +639,9 @@ html.lb-open { overflow: hidden; }
         <li>Mulched seating and vegetable bed area</li>
         <li>Winding natural limestone path</li>
         <li>Live oaks trimmed in September 2026</li>
-        <li>Anlin Panoramic windows installed in the living room and dining room in 2025</li>
         <li>Custom walnut headboard and solid maple floating nightstands</li>
         <li>New solar shades, curtains, dimmable lighting and fixtures</li>
+        <li>Anlin Panoramic windows installed in the living room and dining room in 2025</li>
       </ul>
     </div>
   </section>
@@ -645,7 +649,7 @@ html.lb-open { overflow: hidden; }
   <section id="packet" class="band" data-tone="mist" data-chapter>
     <div class="wrap head">
       <h2>Buyer information packet</h2>
-      <p class="lede">Disclosures and records are sent by email rather than posted publicly. Share your email and phone and the complete packet will be sent to you.</p>
+      <p class="lede">Request property disclosures and records.</p>
     </div>
     <div class="wrap columns">
       <div class="stack">
@@ -665,7 +669,6 @@ html.lb-open { overflow: hidden; }
       </div>
       <form class="form packet" id="packetForm">
         <label for="p-email" class="full">Email<input id="p-email" name="email" type="email" autocomplete="email" required></label>
-        <label for="p-phone" class="full">Phone<input id="p-phone" name="phone" type="tel" autocomplete="tel" required></label>
         <button class="send" type="submit">Request the Complete Buyer Information Packet</button>
         <p class="fine full" id="packetNote" role="status">This form is a preview and does not send anything yet.</p>
       </form>
