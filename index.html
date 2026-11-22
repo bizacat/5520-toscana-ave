@@ -134,9 +134,8 @@ main { padding-right: var(--rail); overflow-x: clip; }
 .hero-type h1 { white-space: nowrap; font-size: 9vw; font-size: min(11cqi, 12.5rem); }
 .status-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
 .status-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; min-width: 0; }
-.badge { display: inline-block; padding: 7px 16px 6px; border-radius: 999px; background: var(--forsythia); color: var(--ink); font-size: .85rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.badge { justify-self: start; display: inline-block; padding: 7px 16px 6px; border-radius: 999px; background: #2F7C89; color: #FFFFFF; font-size: .85rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .stage { position: relative; }
-.stage .ph { clip-path: inset(0 calc(var(--w, 1) * 7vw) 0 calc(var(--w, 1) * 7vw)); }
 .hero-salvia { flex: 0 0 auto; width: clamp(84px, 14vw, 230px); margin-bottom: -.35em; pointer-events: none; }
 .say { font-family: var(--display); font-size: clamp(1.7rem, 3.9vw, 4rem); line-height: 1.16; max-width: 21em; text-wrap: pretty; }
 .say em { font-style: normal; background: linear-gradient(transparent 62%, var(--forsythia) 62%); }
@@ -149,7 +148,7 @@ main { padding-right: var(--rail); overflow-x: clip; }
 .rest-plant { right: 1%; top: clamp(60px, 7vw, 120px); width: clamp(180px, 21vw, 360px); }
 @media (max-width: 760px) { .rest-plant { display: none; } }
 .arrive-plant { right: 6%; top: -9%; width: clamp(130px, 21vw, 340px); }
-.intro { padding-top: clamp(96px, 13vw, 190px); display: grid; gap: clamp(36px, 4.5vw, 64px); justify-items: start; }
+.intro { padding-top: clamp(56px, 8vw, 120px); display: grid; gap: clamp(36px, 4.5vw, 64px); justify-items: start; }
 .glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(22px, 2.6vw, 36px) clamp(16px, 2.4vw, 36px); margin: 0; width: 100%; border-top: 1.5px solid currentColor; padding-top: clamp(20px, 2vw, 28px); }
 .glance > div { display: grid; gap: 4px; align-content: start; min-width: 0; }
 .glance dt { font-size: .9rem; opacity: .72; }
@@ -262,6 +261,23 @@ html.lb-open { overflow: hidden; }
 .form select option { color: var(--ink); }
 .form .full { grid-column: 1 / -1; }
 .send { justify-self: start; font: 600 1.1rem var(--body); background: var(--forsythia); color: var(--ink); border: 0; padding: 16px 32px; cursor: pointer; border-radius: 999px; }
+.place { margin-top: -8px; }
+.intro-lead { display: grid; grid-template-columns: minmax(0, 1fr) clamp(76px, 22vw, 340px); align-items: end; gap: clamp(12px, 3vw, 48px); width: 100%; }
+.plan-wrap { display: grid; gap: 20px; }
+.plan-wrap .plan { width: min(100%, 680px); }
+.yard-step { position: relative; height: calc(100vh - var(--bar) + 80vh); height: calc(100svh - var(--bar) + 80vh); }
+.yard-stage { position: sticky; top: var(--bar); height: calc(100vh - var(--bar)); height: calc(100svh - var(--bar)); overflow: hidden; }
+.yard-stage .ph { position: absolute; inset: 0; margin: 0; background: var(--oak); }
+.yard-stage .shot { top: 0; height: 100%; }
+.yard-copy { position: absolute; left: 0; bottom: 0; z-index: 2; box-sizing: border-box; width: min(100%, 37em); display: grid; gap: 14px; padding: clamp(24px, 3.4vw, 52px); padding-left: max(var(--gut), env(safe-area-inset-left, 0px)); padding-bottom: clamp(40px, 3.4vw, 52px); background: color-mix(in srgb, #12271C 82%, transparent); color: #F4F6EA; will-change: transform; }
+.yard-copy h2 { font-size: clamp(2.3rem, 4.8vw, 5rem); }
+@media (prefers-reduced-motion: reduce) { .yard-step { height: auto; } .yard-stage { position: relative; top: 0; height: 80vh; } }
+@media (min-width: 900px) {
+  .spec-wide { grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr) minmax(0, .75fr) minmax(0, 1.25fr); }
+  .spec-wide dt:nth-of-type(even) { padding-left: clamp(24px, 3vw, 48px); }
+}
+.bullets { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; }
+.faq { max-width: 52em; }
 .checklist { list-style: none; margin: 0; padding: 0; }
 .checklist li { padding: 10px 0 10px 28px; border-top: 1px solid color-mix(in srgb, var(--on) 18%, transparent); position: relative; }
 .checklist li::before { content: ""; position: absolute; left: 4px; top: 50%; width: 12px; height: 6px; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-70%) rotate(-45deg); }
@@ -301,23 +317,20 @@ html.lb-open { overflow: hidden; }
 <main id="viewHome">
   <section id="top" data-tone="paper">
     <div class="wrap hero-type">
-      <div class="status-row">
-        <div class="status-meta">
-          <span class="badge" id="status">Coming soon</span>
-          <p class="label">Austin, Texas 78724</p>
-        </div>
-        <div class="hero-salvia" data-plant="autumn" data-depth=".06"></div>
-      </div>
+      <span class="badge" id="status">For sale</span>
       <h1>5520 Toscana Ave</h1>
+      <p class="label place">Austin, Texas 78724</p>
     </div>
-    <div class="stage" id="widen">
+    <div class="stage">
       <figure class="ph r32 still">
         <img class="shot" src="assets/front-hero.jpg" alt="Blue stucco house with a terracotta tile roof behind a live oak, with native beds along the curb" fetchpriority="high">
       </figure>
-      <div class="float" data-plant="white" data-depth=".3" style="left:2%;bottom:-16%;width:clamp(140px,24vw,400px)"></div>
     </div>
     <div class="wrap intro">
-      <p class="say">This bright, move-in ready, single-story Mediterranean home in <em>the Agave neighborhood</em> features a beautifully maintained native Texas shade garden.</p>
+      <div class="intro-lead">
+        <p class="say">This bright, move-in ready, single-story Mediterranean home in <em>the Agave neighborhood</em> features a beautifully maintained native Texas shade garden.</p>
+        <div class="intro-plant" data-plant="white"></div>
+      </div>
       <dl class="glance nums">
         <div><dt>Price</dt><dd><span class="todo">To be set</span></dd></div>
         <div><dt>Bedrooms</dt><dd>3, plus a flex room</dd></div>
@@ -328,7 +341,7 @@ html.lb-open { overflow: hidden; }
         <div><dt>Parking</dt><dd>2-car garage</dd></div>
         <div><dt>Built</dt><dd>2006, one story</dd></div>
       </dl>
-      <a class="go" href="#details">All the details and answers</a>
+      <a class="more" href="#details">View More Details</a>
     </div>
   </section>
 
@@ -401,9 +414,16 @@ html.lb-open { overflow: hidden; }
     </div>
     <div class="wrap">
       <div class="copy">
-        <h3>Quiet, and easy to cool</h3>
-        <p>The living room and dining room windows were replaced in 2025 with Anlin Panoramic low-E glass. They open easily, filter the sun and heat, and keep outside sound out. With mature trees shading the hottest part of the day, utility costs stay low. <span class="todo">Add your 12-month average</span></p>
+        <h3>Comfortable and calm, year-round</h3>
+        <p>The living room and dining room windows were replaced in 2025 with Anlin Panoramic low-E glass. They open easily, filter the sun and heat, and help soften outside noise. With mature trees shading the hottest part of the day, utility costs stay low. <span class="todo">Add your 12-month average</span></p>
       </div>
+    </div>
+    <div class="grid wrap">
+      <div class="note c5">
+        <h3>Laundry</h3>
+        <p>A separate laundry room with a supply shelf opens straight into the garage.</p>
+      </div>
+      <figure class="ph r32 c7"><img class="shot" data-drift src="assets/laundry.jpg" alt="Laundry room with washer and dryer hookups, a shelf and a door to the garage" loading="lazy"></figure>
     </div>
   </section>
 
@@ -411,7 +431,7 @@ html.lb-open { overflow: hidden; }
     <div class="float rest-plant" data-plant="rainbow" data-depth=".12"></div>
     <div class="wrap head">
       <p class="label">Rest</p>
-      <h2>Three bedrooms, no stairs.</h2>
+      <h2>Three comfortable bedrooms.</h2>
       <p class="lede">The primary suite fits a king-size bed and has its own bath and walk-in closet, a custom walnut headboard and solid maple floating nightstands with dimmable lighting. The other two bedrooms share the second full bath.</p>
     </div>
     <div class="bleed-l">
@@ -423,22 +443,30 @@ html.lb-open { overflow: hidden; }
       <figure class="ph r32 c6"><img class="shot" data-drift src="assets/bedroom-2.jpg" alt="Second bedroom with a queen bed and window" loading="lazy"></figure>
       <figure class="ph r32 c6"><img class="shot" data-drift src="assets/bedroom-3.jpg" alt="Third bedroom set up as a reading room, with a window and ceiling fan" loading="lazy"></figure>
     </div>
+    <div class="wrap plan-wrap">
+      <h3>Floor plan</h3>
+      <figure class="plan"><img src="assets/floor-plan.png" alt="Floor plan showing the office and foyer at the front, open dining, kitchen and living areas, three bedrooms, two baths, laundry and garage" loading="lazy"></figure>
+    </div>
   </section>
 
   <section id="outback" data-tone="oak" data-chapter>
-    <div class="pin" id="pin">
-      <div class="pin-stage" id="pinStage">
-        <figure class="ph on"><img class="shot" src="assets/yard-path.jpg" alt="Fenced backyard with a limestone path leading under the live oak to a seating corner" loading="lazy"></figure>
+    <div class="yard">
+      <div class="yard-step"><div class="yard-stage">
+        <figure class="ph"><img class="shot" src="assets/yard-path.jpg" alt="Fenced backyard with a limestone path leading under the live oak to a seating corner" loading="lazy"></figure>
+        <div class="yard-copy"><p class="label">Out back</p><h2>A yard with room for everything.</h2><p>Sun, shade, paths and planting beds give the fenced yard distinct spaces to relax, entertain and grow, all under a mature live oak and redbuds.</p></div>
+      </div></div>
+      <div class="yard-step"><div class="yard-stage">
         <figure class="ph"><img class="shot" src="assets/yard-beds.jpg" alt="Native beds along the back fence, a stone fountain and a hanging chair under the oak" loading="lazy"></figure>
+        <div class="yard-copy"><p class="label">Midday</p><h2>Shade when you want it.</h2><p>A limestone footpath winds past a stone fountain and native beds along the fence, all under the shade of the oak.</p></div>
+      </div></div>
+      <div class="yard-step"><div class="yard-stage">
         <figure class="ph"><img class="shot" src="assets/yard-seating.jpg" alt="Mulched seating corner with a raised metal garden bed and potted herbs" loading="lazy"></figure>
+        <div class="yard-copy"><p class="label">Gather</p><h2>Room to grow.</h2><p>The back corner pairs a seating area for friends with raised metal veggie beds on a soak hose, so you can host and harvest in the same spot.</p></div>
+      </div></div>
+      <div class="yard-step"><div class="yard-stage">
         <figure class="ph"><img class="shot" src="assets/yard-house.jpg" alt="Back of the house in blue stucco, seen from beneath the live oak" loading="lazy"></figure>
-        <div class="pin-copy">
-          <div class="on"><p class="label">Out back</p><h2>A yard with room for everything.</h2><p>Sun, shade, paths and planting beds give the fenced yard distinct spaces to relax, entertain and grow, all under a mature live oak, a hackberry and redbuds.</p></div>
-          <div><p class="label">Midday</p><h2>Shade when you want it.</h2><p>A limestone footpath winds past a stone fountain and native beds along the fence, all under the shade of the oak.</p></div>
-          <div><p class="label">Gather</p><h2>Room to grow.</h2><p>The back corner pairs a seating area for friends with raised metal veggie beds on a soak hose, so you can host and harvest in the same spot.</p></div>
-          <div><p class="label">Upkeep</p><h2>Easy to keep up.</h2><p>Drought-tolerant native groundcover stands in for thirsty lawn, a rain barrel that stays with the house catches runoff, and the trees were trimmed in September 2026. The oak also shades the back of the house through the hottest part of the day.</p></div>
-        </div>
-      </div>
+        <div class="yard-copy"><p class="label">Upkeep</p><h2>Easy to keep up.</h2><p>Drought-tolerant native groundcover stands in for thirsty lawn, a rain barrel that stays with the house catches runoff, and the trees were trimmed in September 2026. The oak also shades the back of the house through the hottest part of the day.</p></div>
+      </div></div>
     </div>
   </section>
 
@@ -498,46 +526,41 @@ html.lb-open { overflow: hidden; }
   <section id="details" class="band" data-tone="paper" data-chapter>
     <div class="wrap head">
       <p class="label">Details</p>
-      <h2>Everything you would ask an agent.</h2>
+      <h2>All About the Property</h2>
     </div>
-    <div class="wrap columns">
-      <div class="stack">
-        <h3>The numbers</h3>
-        <dl class="spec nums">
-          <dt>Price</dt><dd><span class="todo">To be set</span></dd>
-          <dt>Bedrooms</dt><dd>3, plus a flex room</dd>
-          <dt>Bathrooms</dt><dd>2 full</dd>
-          <dt>Living area</dt><dd>1,289 sq ft</dd>
-          <dt>Ceilings</dt><dd>10 ft</dd>
-          <dt>Lot</dt><dd>0.1407 acres, fenced</dd>
-          <dt>Built</dt><dd>2006</dd>
-          <dt>Stories</dt><dd>1</dd>
-          <dt>Exterior</dt><dd>Stucco, concrete tile roof</dd>
-          <dt>Garage</dt><dd>Attached 2-car, with workshop space and built-in shelving</dd>
-          <dt>Heating and cooling</dt><dd>Central, serviced twice a year</dd>
-          <dt>Flooring</dt><dd>Tile in main living areas, carpet in bedrooms</dd>
-          <dt>Smart home</dt><dd>Smart thermostat, keyless entry, transferable Wyze security</dd>
-          <dt>POA</dt><dd>Agave, $60 per quarter <span class="todo">Confirm</span></dd>
-          <dt>Property tax</dt><dd>$6,841 (2024) <span class="todo">Update</span></dd>
-          <dt>County</dt><dd>Travis</dd>
-        </dl>
-      </div>
-      <div class="stack">
-        <h3>Floor plan</h3>
-        <figure class="plan"><img src="assets/floor-plan.jpg" alt="Floor plan showing the office and foyer at the front, open dining, kitchen and living areas, three bedrooms, two baths, laundry and garage" loading="lazy"></figure>
-        <h3>Laundry</h3>
-        <figure class="ph r32"><img class="shot" data-drift src="assets/laundry.jpg" alt="Laundry room with washer and dryer hookups, a shelf and a door to the garage" loading="lazy"></figure>
-      </div>
+    <div class="wrap">
+      <dl class="spec spec-wide nums">
+        <dt>Price</dt><dd><span class="todo">To be set</span></dd>
+        <dt>Bedrooms</dt><dd>3, plus a flex room</dd>
+        <dt>Bathrooms</dt><dd>2 full</dd>
+        <dt>Living area</dt><dd>1,289 sq ft</dd>
+        <dt>Ceilings</dt><dd>10 ft</dd>
+        <dt>Lot</dt><dd>0.1407 acres, fenced</dd>
+        <dt>Built</dt><dd>2006</dd>
+        <dt>Stories</dt><dd>1</dd>
+        <dt>Exterior</dt><dd>Stucco</dd>
+        <dt>Roof</dt><dd>Original concrete tile in a terracotta style, with an expected lifespan of 50+ years</dd>
+        <dt>Garage</dt><dd>Attached 2-car, with workshop space and built-in shelving</dd>
+        <dt>Heating and cooling</dt><dd>Original 3-ton Rheem system, serviced twice a year, heating and cooling efficiently and reliably</dd>
+        <dt>Flooring</dt><dd>Tile in main living areas, carpet in bedrooms</dd>
+        <dt>Smart home</dt><dd>Smart thermostat, keyless entry, transferable Wyze security</dd>
+        <dt>POA dues</dt><dd>Agave POA, $70 per quarter</dd>
+        <dt>Property tax</dt><dd>$6,841 (2024) <span class="todo">Update</span></dd>
+        <dt>School district</dt><dd>Manor ISD</dd>
+        <dt>County</dt><dd>Travis</dd>
+      </dl>
     </div>
     <div class="wrap columns">
       <div class="stack">
         <h3>Recent work</h3>
-        <dl class="spec nums">
-          <dt>2026</dt><dd>Live oaks and hackberry trimmed in September</dd>
-          <dt>2025</dt><dd>Anlin Panoramic windows in the living room and dining room</dd>
-          <dt>Custom</dt><dd>Walnut headboard, maple nightstands</dd>
-          <dt>New</dt><dd>Solar shades, curtains, dimmable lighting and fixtures</dd>
-        </dl>
+        <ul class="bullets">
+          <li>Live oaks trimmed in September 2026</li>
+          <li>Anlin Panoramic windows installed in the living room and dining room in 2025</li>
+          <li>Custom walnut headboard and solid maple floating nightstands</li>
+          <li>New solar shades, curtains, dimmable lighting and fixtures</li>
+        </ul>
+      </div>
+      <div class="stack">
         <h3>Buyer information packet</h3>
         <p>Disclosures and records are sent by email rather than posted publicly. The packet includes:</p>
         <ul class="checklist">
@@ -553,21 +576,28 @@ html.lb-open { overflow: hidden; }
           <li>Garden care guide</li>
         </ul>
         <form class="form packet" id="packetForm">
-          <label for="p-email" class="full">Your email<input id="p-email" name="email" type="email" autocomplete="email" required></label>
+          <label for="p-email" class="full">Email<input id="p-email" name="email" type="email" autocomplete="email" required></label>
+          <label for="p-phone" class="full">Phone<input id="p-phone" name="phone" type="tel" autocomplete="tel" required></label>
           <button class="send" type="submit">Request the Complete Buyer Information Packet</button>
           <p class="fine full" id="packetNote" role="status">This form is a preview and does not send anything yet.</p>
         </form>
       </div>
-      <div class="stack">
-        <h3>Straight answers</h3>
-        <div class="asks">
-          <details><summary>Why are you selling?</summary><p>I'm relocating out of state, and I have flexibility on the timeline.</p></details>
-          <details><summary>How did you arrive at the price?</summary><p><span class="todo">Recent nearby sales and the appraisal, if you get one</span></p></details>
-          <details><summary>How do showings work?</summary><p>The home is owner-occupied, so showings are by appointment. Buyers without an agent are asked for a pre-approval letter or proof of funds and a photo ID, which are deleted after the showing. For weekend showings, documents are due by noon on Friday.</p></details>
-          <details><summary>Do you work with buyer's agents?</summary><p>Yes. I'm open to all written offers. Feel free to include your requested commission in the contract. I evaluate every offer on its net terms.</p></details>
-          <details><summary>How do I make an offer?</summary><p>Use the standard TREC One to Four Family Residential Contract and email it with a pre-approval letter or proof of funds dated within the last 30 days. Title is through Rise Title. Please allow 24 to 48 hours for a response.</p></details>
-          <details><summary>What stays with the house?</summary><p>The Wyze security system, the rain barrel and the garden care guide.<span class="todo">Add appliances, shades and anything else</span></p></details>
-        </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band" data-tone="paper">
+    <div class="wrap head">
+      <h2>FAQ</h2>
+    </div>
+    <div class="wrap">
+      <div class="asks faq">
+        <details><summary>Why are you selling?</summary><p>I'm relocating out of state, and I have flexibility on the timeline.</p></details>
+        <details><summary>How did you arrive at the price?</summary><p><span class="todo">Recent nearby sales and the appraisal, if you get one</span></p></details>
+        <details><summary>How do showings work?</summary><p>The home is owner-occupied, so showings are by appointment. Buyers without an agent are asked for a pre-approval letter or proof of funds and a photo ID, which are deleted after the showing. For weekend showings, documents are due by noon on Friday.</p></details>
+        <details><summary>Do you work with buyer's agents?</summary><p>Yes. I'm open to all written offers. Feel free to include your requested commission in the contract. I evaluate every offer on its net terms.</p></details>
+        <details><summary>How do I make an offer?</summary><p>Use the standard TREC One to Four Family Residential Contract and email it with a pre-approval letter or proof of funds dated within the last 30 days. Title is through Rise Title. Please allow 24 to 48 hours for a response.</p></details>
+        <details><summary>What stays with the house?</summary><p>The Wyze security system, the rain barrel and the garden care guide.<span class="todo">Add appliances, shades and anything else</span></p></details>
+      </div>
       </div>
     </div>
   </section>
@@ -586,7 +616,8 @@ html.lb-open { overflow: hidden; }
     <div class="wrap">
       <form class="form" id="form">
         <label for="f-name">Your name<input id="f-name" name="name" autocomplete="off" required></label>
-        <label for="f-contact">Email or phone<input id="f-contact" name="contact" autocomplete="off" required></label>
+        <label for="f-email">Email<input id="f-email" name="email" type="email" autocomplete="email" required></label>
+        <label for="f-phone">Phone<input id="f-phone" name="phone" type="tel" autocomplete="tel" required></label>
         <label for="f-role" class="full">Which describes you?<select id="f-role" name="role"><option>Working with an agent</option><option>I am an agent</option><option>Buying on my own and ready, with pre-approval or proof of funds</option><option>Just looking for now</option></select></label>
         <button class="send" type="submit">Request a showing</button>
         <p class="fine full" id="formNote" role="status">This form is a preview and does not send anything yet.</p>
@@ -793,7 +824,7 @@ html.lb-open { overflow: hidden; }
     {h:"Backyard",beds:[
       {n:"Corner bed",p:["Crossvine|On the trellis","Esperanza yellow bells","Autumn sage","Gregg's blue mistflower","Ischia fig|Green when ripe, edible around August","Gold lantana","Flame acanthus"]},
       {n:"Along the back of the house",p:["Pink Turk's cap","Regular Turk's cap","Big Momma Turk's cap"]}]},
-    {h:"Trees",beds:[{n:"Trimmed September 2026",p:["Live oaks|Front and back","Hackberry|In the middle","Redbuds|In the back"]}]},
+    {h:"Trees",beds:[{n:"Trimmed September 2026",p:["Live oaks|Front and back","Redbuds|In the back"]}]},
     {h:"Also growing here",beds:[{n:"Beds to confirm",todo:true,p:["Forsythia sage","White gaura","Rainbow gaura","Calylophus","Dwarf palmetto","Rosemary"]}]}
   ];
   var unique={};
@@ -831,9 +862,8 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
   var chapters=[].slice.call(document.querySelectorAll("[data-chapter]"));
   var links=[].slice.call(document.querySelectorAll("#stem a:not(.home)")), stem=document.getElementById("stem");
   var floats=[].slice.call(document.querySelectorAll("[data-depth]")), drifts=[].slice.call(document.querySelectorAll("[data-drift]"));
-  var widen=document.getElementById("widen"), pin=document.getElementById("pin"), stage=document.getElementById("pinStage");
-  var shots=[].slice.call(stage.querySelectorAll(".ph")), steps=[].slice.call(stage.querySelectorAll(".pin-copy > div"));
-  var lastTone, lastStep=0, ticking=false, pinCopy=stage.querySelector(".pin-copy"), narrow=matchMedia("(max-width: 760px)");
+  var yardSteps=[].slice.call(document.querySelectorAll(".yard-step")).map(function(el){ return { el:el, stage:el.querySelector(".yard-stage"), copy:el.querySelector(".yard-copy") }; });
+  var lastTone, ticking=false;
   function setTone(t){ if(t===lastTone) return; lastTone=t; var c=tones[t], s=document.body.style; s.setProperty("--now",root.getPropertyValue(c[0])); s.setProperty("--on",root.getPropertyValue(c[1])); }
   function frameTick(){
     ticking=false; if(document.body.classList.contains("on-plants")){ setTone("leaf"); return; } var h=vh(), line=h*.55;
@@ -846,13 +876,8 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
     if(!calm){
       floats.forEach(function(el){ var y=+el.dataset.y||0, b=el.getBoundingClientRect(); if(b.bottom+200<0||b.top-200>h) return; var c=b.top-y+b.height/2, ny=(c-h/2)*+el.dataset.depth; el.dataset.y=ny; el.style.transform="translate3d(0,"+ny.toFixed(1)+"px,0)"; });
       drifts.forEach(function(el){ var b=el.parentNode.getBoundingClientRect(); if(b.bottom<0||b.top>h) return; var p=(b.top+b.height/2-h/2)/(h/2+b.height/2); el.style.transform="translate3d(0,"+(p*-7.5).toFixed(2)+"%,0)"; });
-      var w=widen.getBoundingClientRect(); widen.style.setProperty("--w",Math.max(0,Math.min(1,(w.top-h*.16)/(h*.42))).toFixed(3));
-      var pb=pin.getBoundingClientRect(), span=pb.height-stage.offsetHeight, pp=Math.max(0,Math.min(1,-(pb.top-60)/span));
-      stage.style.setProperty("--pp",pp.toFixed(3));
-      var st=Math.min(shots.length-1,Math.floor(pp*shots.length));
-      /* On phones, the text steps aside for the second half of each step so the photo shows on its own. */
-      pinCopy.classList.toggle("reveal",narrow.matches&&(pp*shots.length-st)>0.5);
-      if(st!==lastStep){ lastStep=st; shots.forEach(function(s,i){ s.classList.toggle("on",i===st); }); steps.forEach(function(s,i){ s.classList.toggle("on",i===st); }); }
+      /* Backyard: each photo pins while its text holds, then the text scrolls up and away, the photo shows alone, and the next photo scrolls in. */
+      yardSteps.forEach(function(y){ var r=y.el.getBoundingClientRect(); if(r.bottom<0||r.top>h) return; var stageH=y.stage.offsetHeight, span=y.el.offsetHeight-stageH, p=Math.max(0,Math.min(1,(60-r.top)/span)), t=Math.max(0,Math.min(1,(p-.375)/.3125)); y.copy.style.transform="translate3d(0,"+(-t*stageH).toFixed(1)+"px,0)"; });
     }
   }
   function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(frameTick); } }
@@ -878,7 +903,7 @@ var calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
   var thumbButtons=[].slice.call(lbThumbs.querySelectorAll("button"));
   function show(i){
     at=(i+deck.length)%deck.length; var img=deck[at];
-    lbImg.src=src(img); lbImg.alt=img.alt; lbCap.textContent=img.alt; lbCount.textContent=(at+1)+" / "+deck.length;
+    lbImg.src=src(img); lbImg.style.background=/\.png$/.test(src(img))?"#F7F3E8":""; lbImg.alt=img.alt; lbCap.textContent=img.alt; lbCount.textContent=(at+1)+" / "+deck.length;
     thumbButtons.forEach(function(b,k){ b.setAttribute("aria-current",k===at?"true":"false"); });
     thumbButtons[at].scrollIntoView({block:"nearest",inline:"center"});
     new Image().src=src(deck[(at+1)%deck.length]);
